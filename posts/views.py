@@ -1,7 +1,7 @@
 # from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
-
+request = HttpRequest()
 def index_view(request):
     return HttpResponse ("Главная страница")
 

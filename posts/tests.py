@@ -6,12 +6,6 @@ class PostsTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_index_view(self):
-        response = self.client.get(reverse("index-view"))
-        exp_data = "Главная страница"
-
-        self.assertEqual(response.content.decode(), exp_data)
-
     def test_get_contacts(self):
         response = self.client.get(reverse('contacts'))
         exp_data = "good"

@@ -2,9 +2,6 @@
 from django.http import HttpResponse, HttpRequest
 
 request = HttpRequest()
-def index_view(request):
-    return HttpResponse ("Главная страница")
-
 def get_contacts(request):
     return HttpResponse('good')
 

@@ -5,9 +5,11 @@ from django.http import HttpResponse, HttpRequest
 def index_bek(requests):
     return HttpResponse ("Главная страница", status=200)
 
+
 def get_contacts(request):
-    return HttpResponse('good', status=500)
+    return HttpResponse('Контакты', status=200)
+
 
 def get_about(request):
-    return HttpResponse('good 2.0',status=400)
+    return HttpResponse('О нас',status=200)
 

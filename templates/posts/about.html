@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h1>Привет из about</h1>
+
+<br>
+    <a href="{% url 'index-bek' %}">Главная страница</a></br>
+    <a href="{% url 'contacts' %}">Контакты</a></br>
+
+{% endblock %}

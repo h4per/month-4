@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1>Главная страница</h1>
+
+<!-- 
+<h1>Привет из views.py</h1>
+{{ name }}
+{{ my_list }}<br>
+<ul>
+{% for item in my_list %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% if 4 in my_list %}
+    <p>4 есть в списке</p>
+{% elif 2 in my_list %}
+    <p>2 есть в списке</p>
+{% else %}
+    <p>нет таких вещей</p>
+{% endif %} -->
+
+    <br>
+    <a href="{% url 'contacts' %}">Контакты</a></br>
+    <a href="{% url 'about' %}">О нас</a></br>
+
+{% endblock %}

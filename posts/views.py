@@ -11,7 +11,7 @@ def index_bek(request):
     }
     return render(request, "posts/index.html", context=context)
 
-
+ 
 
 def get_contacts(request):
     context = {

@@ -24,7 +24,26 @@ class PostsTestCase(TestCase):
     def test_get_about(self):
         response = self.client.get(reverse('about'))
 
-        self.assertTemplateUsed(response, 'posts/abourt.html')
+        self.assertTemplateUsed(response, 'posts/about.html')
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_post_detail(self):
+        response = self.client.get(reverse('post-detail'))
+
+        self.assertTemplateUsed(response, 'posts/post_detail.html')
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_post_update(self):
+        response = self.client.get(reverse('post-update'))
+
+        self.assertTemplateUsed(response, 'posts/post_update.html')
         self.assertEqual(response.status_code, 200)
 
     
+    def test_post_delete(self):
+        response = self.client.get(reverse('post-delete'))
+
+        self.assertTemplateUsed(response, 'posts/post_delete.html')
+        self.assertEqual(response.status_code, 200)

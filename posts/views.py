@@ -72,22 +72,3 @@ def post_detail(request, pk):
     return render(request, "posts/post_detail.html", {"post": post})
 
 
-def post_verify(request):
-    context = {
-        "title": "Страница верификации",
-    }
-    return render(request, "posts/post_verify.html", context=context)
-
-
-# def post_delete(request, pk):
-#     if request.method == "POST":
-#         post = Post.objects.get(pk=pk)
-#         post.delete()
-#         return reverse_lazy("index-bek")
-#     return render(request, "posts/post_delete.html")
-
-
-# def post_create(request):
-#     if request.method == "POST":
-#         post = Post.objects.create(title=request.POST.get("zagolovok"))
-#     return render(request, "posts/post_create.html", {"post": post})

@@ -3,8 +3,6 @@ from django.http import HttpResponse, HttpRequest
 from posts.models import Post
 from django.views import generic
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView
 
 
 class IndexView(generic.ListView):

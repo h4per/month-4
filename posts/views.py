@@ -74,13 +74,6 @@ def post_detail(request, pk):
     return render(request, "posts/post_detail.html", {"post": post})
 
 
-def post_verify(request):
-    context = {
-        "title": "Страница верификации",
-    }
-    return render(request, "posts/post_verify.html", context=context)
-
-
 # def post_delete(request, pk):
 #     if request.method == "POST":
 #         post = Post.objects.get(pk=pk)

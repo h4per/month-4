@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-from posts.models import Post
+from posts.models import Post, Comment
 from django.views import generic
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView
+from posts.forms import CommentForm, PostForm
 
 
 class IndexView(generic.ListView):
@@ -18,12 +17,22 @@ class PostDetailView(generic.DetailView):
     model = Post
     template_name = "posts/post_detail.html"
     context_object_name = "post"
+    extra_context = {"form": CommentForm()}
+
+    def post(self, request, pk):
+        form = CommentForm(request.POST)
+        post = Post.objects.get(pk=pk)
+        if form.is_valid():
+            pre_saved_comment = form.save(commit=False)
+            pre_saved_comment.post = post
+            pre_saved_comment.save()
+        return redirect("post-detail", pk)
 
 
 class PostCreateView(generic.CreateView):
     model = Post
     template_name = "posts/post_create.html"
-    fields = ["title", "content", "status", "category", "cover"]
+    form_class = PostForm
     success_url = reverse_lazy("index-bek")
 
 
@@ -35,7 +44,7 @@ class PostDeleteView(generic.DeleteView):
 class PostUpdateView(generic.UpdateView):
     model = Post
     template_name = "posts/post_update.html"
-    fields = ["title", "content", "status", "category", "cover"]
+    form_class = PostForm
     success_url = reverse_lazy("index-bek")
 
 
@@ -73,16 +82,3 @@ def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     return render(request, "posts/post_detail.html", {"post": post})
 
-
-# def post_delete(request, pk):
-#     if request.method == "POST":
-#         post = Post.objects.get(pk=pk)
-#         post.delete()
-#         return reverse_lazy("index-bek")
-#     return render(request, "posts/post_delete.html")
-
-
-# def post_create(request):
-#     if request.method == "POST":
-#         post = Post.objects.create(title=request.POST.get("zagolovok"))
-#     return render(request, "posts/post_create.html", {"post": post})

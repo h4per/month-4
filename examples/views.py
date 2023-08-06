@@ -1,6 +1,7 @@
-# from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-
+from django.conf import settings
+from django.core.mail import send_mail
 
 request = HttpRequest()
 def test_view(request):
@@ -55,3 +56,12 @@ def catch_number_view(request, number):
 
 def catch_string_view(request, string):
     return HttpResponse(f"Your string: {string}")
+
+def email_view(request):
+    subject = 'gfd'
+    message = 'vfd'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['olegivanov81360@gmail.com']
+
+    send_mail(subject, message, email_from, recipient_list)
+    return HttpResponse('goodbye')

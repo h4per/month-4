@@ -7,9 +7,10 @@
 
 {% block content %}
     <h1>Создать аккаунт</h1>
+    <p>Зарегистрируйтесь введя следующие данные</p>
     <form action="" method="post" class="mx-auto" style="width: 35rem;">
         {% csrf_token %}
-            {{ form|crispy }}<br>
+        {{ form|crispy }}<br>
         <button type="submit" class="btn btn-success">Зарегистрироваться</button>
     </form>
 {% endblock %}

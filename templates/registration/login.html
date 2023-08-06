@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+{% block title %}
+    Здравствуйте. Пожайлуста, войдите.
+{% endblock %}
+
+{% block content %}
+    {% comment %} {% if form.errors %}
+        <p>Ваши пароль и логин не совпадают. Попробуйте еще раз.</p>
+    {% endif %} {% endcomment %}
+
+    {% if next %}
+        {% if user.is_auntenticated %}
+            <p>У вас нет прав для просмотра страницы. Пожайлуста, войдите с учетной записью, которая имеет доступ.</p>
+        {% else %}
+        <p>Пожайлуста, войдите, чтобы увидеть эту страницу. </p>
+        {% endif %}
+    {% endif %}
+
+    <form action="" method="post" class="mx-auto" style="width: 35rem;">
+        {% csrf_token %}
+            {{ form|crispy }}<br>
+        <button type="submit" class="btn btn-success">Войти</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+
+{% endblock %}

@@ -5,6 +5,22 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from django.core.mail import send_mail
 
+from users.serializers import UserSerializer, UserDetailSerializer
+from rest_framework import generics
+from users.models import GeekUser
+from users.forms import UserRegistrationForm
+
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = GeekUser.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetailAPIView(generics.RetrieveAPIView):
+    queryset = GeekUser.objects.all()
+    serializer_class = UserDetailSerializer
+    lookup_field = "id"
+
 
 class UserRegisterView(generic.CreateView):
     template_name = 'registration/register.html'
@@ -18,9 +34,7 @@ class UserRegisterView(generic.CreateView):
             new_user.set_password(user_form.clean_password2())
             new_user.save()
             return render(request, "registration/register_done.html", {"user": new_user})
-        else:
-            user_form = UserRegistrationForm()
-            return render(request, "registration/register_done.html", {"form": user_form})
+        return render(request, "registration/register.html", {"form": user_form})
 
 
 def email_view(request):

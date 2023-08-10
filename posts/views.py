@@ -5,6 +5,19 @@ from posts.models import Post, Comment
 from django.views import generic
 from django.urls import reverse_lazy
 from posts.forms import CommentForm, PostForm
+from rest_framework import generics
+from posts.serializers import PostListSerializer, PostDetailSerializer
+
+
+class PostListAPIView(generics.ListAPIView):
+    serializer_class = PostListSerializer
+    queryset = Post.objects.filter(status=True)
+
+
+class PostDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = PostDetailSerializer
+    queryset = Post.objects.filter(status=True)
+    lookup_field = "id"
 
 
 class IndexView(generic.ListView):

@@ -30,6 +30,7 @@
     {% endif %}
     <a href="{% url 'contacts' %}">Контакты</a></br>
     <a href="{% url 'about' %}">О нас</a></br>
+    <a href="{% url "social:begin" "google-oauth2" %}">Google</a>
     <br>
 
 {% endblock %}
